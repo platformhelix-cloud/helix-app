@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export function LandingNav() {
   return (
@@ -11,6 +12,7 @@ export function LandingNav() {
           </span>
         </Link>
         <nav className="flex items-center gap-2">
+          <ThemeToggle />
           <Button variant="ghost" asChild>
             <Link href="/auth/sign-in">Sign In</Link>
           </Button>
