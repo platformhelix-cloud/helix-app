@@ -71,13 +71,13 @@ export function ConversationSidebar() {
       </div>
 
       <div className="flex-1 overflow-y-auto px-2 pb-4">
-        {conversations.length === 0 ? (
+        {conversations.filter((c) => c.title !== null).length === 0 ? (
           <p className="text-muted-foreground px-2 py-4 text-center text-xs">
             No conversations yet
           </p>
         ) : (
           <ul className="space-y-0.5">
-            {conversations.map((conv) => {
+            {conversations.filter((c) => c.title !== null).map((conv) => {
               const isActive = pathname === `/ask/${conv.id}`
               const isConfirming = confirmDeleteId === conv.id
 
