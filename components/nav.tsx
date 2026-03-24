@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
 import { SignOutButton } from "@/components/sign-out-button"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const navLinks = [
   { href: "/dashboard", label: "Dashboard" },
@@ -42,6 +43,7 @@ export async function Nav() {
               {user.email}
             </Link>
           )}
+          <ThemeToggle />
           <SignOutButton />
         </div>
       </div>
