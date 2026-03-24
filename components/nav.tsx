@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
-import { SignOutButton } from "@/components/sign-out-button"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { UserMenu } from "@/components/user-menu"
 
 const navLinks = [
   { href: "/dashboard", label: "Dashboard" },
@@ -16,6 +16,20 @@ export async function Nav() {
   const {
     data: { user },
   } = await supabase.auth.getUser()
+
+  let initials = ""
+  if (user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("first_name, last_name")
+      .eq("id", user.id)
+      .single()
+
+    initials = [profile?.first_name, profile?.last_name]
+      .filter(Boolean)
+      .map((s) => s![0].toUpperCase())
+      .join("")
+  }
 
   return (
     <header className="border-border/40 bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
@@ -34,17 +48,9 @@ export async function Nav() {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-3">
-          {user && (
-            <Link
-              href="/profile"
-              className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors"
-            >
-              {user.email}
-            </Link>
-          )}
+        <div className="flex items-center gap-2">
           <ThemeToggle />
-          <SignOutButton />
+          {user && <UserMenu initials={initials} />}
         </div>
       </div>
     </header>
