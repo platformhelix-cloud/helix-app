@@ -54,26 +54,35 @@ export async function POST(request: Request) {
 
   const buffer = Buffer.from(await file.arrayBuffer())
 
-  // pdf-parse is a CommonJS module — use require() in Node.js runtime
+  // pdf-parse v2 — use require() in Node.js runtime, instantiate PDFParse class
   // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const pdfParse = require("pdf-parse") as (
-    buffer: Buffer
-  ) => Promise<{ text: string; numpages: number }>
+  const { PDFParse } = require("pdf-parse") as {
+    PDFParse: new (params: { data: Buffer }) => {
+      getText(): Promise<{ text: string; total: number }>
+      destroy(): Promise<void>
+    }
+  }
 
-  let pdfData: { text: string; numpages: number }
+  let pdfText: string
+  let pageCount: number
+  const parser = new PDFParse({ data: buffer })
   try {
-    pdfData = await pdfParse(buffer)
+    const result = await parser.getText()
+    pdfText = result.text
+    pageCount = result.total
   } catch {
     return NextResponse.json(
       { error: "Failed to parse PDF" },
       { status: 422 }
     )
+  } finally {
+    await parser.destroy()
   }
 
   const text =
-    pdfData.text.length > MAX_TEXT_LENGTH
-      ? pdfData.text.slice(0, MAX_TEXT_LENGTH)
-      : pdfData.text
+    pdfText.length > MAX_TEXT_LENGTH
+      ? pdfText.slice(0, MAX_TEXT_LENGTH)
+      : pdfText
 
   const safeName = sanitiseFilename(file.name)
   const storagePath = `${user.id}/${conversationId}/${Date.now()}_${safeName}`
@@ -97,6 +106,6 @@ export async function POST(request: Request) {
     url: signedData?.signedUrl ?? "",
     name: file.name,
     text,
-    pageCount: pdfData.numpages,
+    pageCount,
   })
 }
