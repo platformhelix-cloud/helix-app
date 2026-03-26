@@ -7,8 +7,8 @@ export function LandingNav() {
     <header className="border-border/40 bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="mx-auto flex h-14 max-w-screen-xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2">
-          <div className="bg-primary flex h-6 w-6 items-center justify-center rounded-md">
-            <span className="text-primary-foreground text-xs font-bold">H</span>
+          <div className="bg-primary flex h-9 w-9 items-center justify-center rounded-md">
+            <span className="text-primary-foreground text-sm font-bold">H</span>
           </div>
           <span className="font-serif text-xl font-semibold tracking-tight">
             Helix

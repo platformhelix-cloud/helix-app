@@ -34,8 +34,13 @@ export async function Nav() {
   return (
     <header className="border-border/40 bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="mx-auto flex h-14 max-w-screen-xl items-center gap-6 px-6">
-        <Link href="/dashboard" className="font-serif text-lg font-semibold">
-          Helix
+        <Link href="/dashboard" className="flex items-center gap-2">
+          <div className="bg-primary flex h-9 w-9 items-center justify-center rounded-md">
+            <span className="text-primary-foreground text-sm font-bold">H</span>
+          </div>
+          <span className="font-serif text-xl font-semibold tracking-tight">
+            Helix
+          </span>
         </Link>
         <nav className="flex flex-1 items-center gap-1">
           {navLinks.map(({ href, label }) => (
