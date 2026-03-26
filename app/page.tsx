@@ -19,7 +19,7 @@ const features = [
     iconClass: "bg-primary/10 text-primary",
     title: "ASK",
     description:
-      "Get answers grounded in NCC, HVAC standards with citations and references.",
+      "Ask questions grounded in NCC, AS/NZ standards with citations and references.",
     badge: null,
   },
   {
@@ -27,7 +27,7 @@ const features = [
     iconClass: "bg-teal-100 text-teal-600",
     title: "Design Automate",
     description:
-      "Upload PDF drawings for automated energy analysis and annotations.",
+      "Upload CAD drawings for AI-assisted services routing and documentation.",
     badge: "Coming Soon",
   },
   {
@@ -35,7 +35,7 @@ const features = [
     iconClass: "bg-orange-100 text-orange-500",
     title: "Validate",
     description:
-      "Custom checklists for automated generator, electrical, and compliance notes.",
+      "Upload documents for automated grammar, technical, and compliance review.",
     badge: "Coming Soon",
   },
   {
@@ -43,7 +43,7 @@ const features = [
     iconClass: "bg-green-100 text-green-600",
     title: "Compliance",
     description:
-      "Ensure your designs meet NCC, HVAC, and country-specific requirements.",
+      "Ensure your documents meet NCC, AS/NZ, and council-specific requirements.",
     badge: "Coming Soon",
   },
 ]
