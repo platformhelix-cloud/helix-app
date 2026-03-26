@@ -17,7 +17,7 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="mx-auto max-w-screen-xl px-6 py-10">
+    <div className="px-6 py-10">
       <h1 className="font-serif text-3xl font-semibold">Dashboard</h1>
       {user && (
         <p className="text-muted-foreground mt-1 text-sm">
